@@ -1,0 +1,5 @@
+all:
+  hosts:
+    storage-01:
+       ansible_host: 192.168.1.231
+       ansible_user: storage

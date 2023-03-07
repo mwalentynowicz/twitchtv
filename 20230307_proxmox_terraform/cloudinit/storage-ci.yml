@@ -4,6 +4,9 @@ package_upgrade: true
 
 packages:
   - qemu-guest-agent #problem jest, ze on nie wystartuje przy pierwszym boocie
+  - samba
+  - smbclient
+  - cifs-utils
 
 users:
   - name: storage
