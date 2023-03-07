@@ -30,3 +30,6 @@ override.tf.json
 
 # kredki wszelakiej masci, poukrywane w zmiennych
 */credentials.tf
+
+# logi terraforma
+*/terraform.log

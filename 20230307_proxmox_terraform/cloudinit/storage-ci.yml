@@ -1,0 +1,28 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+
+packages:
+  - qemu-guest-agent #problem jest, ze on nie wystartuje przy pierwszym boocie
+
+users:
+  - name: storage
+    groups: sudo, adm
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCoRcw9KH/d8Gm10sMASa4h+b5qP5Tv0x0YU6xvwKMQ71vKkayzgqw3vCX7v71N6GEtiQo7NRciPM6RC3t37N+V/THQFs0V2BIu7oIbTUCXwbtjRJxMGQpIeEaGnC1TlHqK+I2P4oLhnI6Yc9vyWp7V3/Z9UsfuSRVzkK4bW0dS4kJqTd5og6gUvvzsoTAlVZxIr2m9SVXS7xsFOHf0zKYQ4BiD4jsrCuv6o+Pe54mwme05J3KIBPS1hESlA9rFIOY68kp4sH2ZfJ6fA8IZ3PvIvxU5o5cA17SACVIPx5fjCqF75uuZg+hmf/RufzBhRw4UnCX8TnRHS7T+XMORUKfcrIpgAImjxn0jpM0vDNGaCSUrRzyS9aCkfj5+5wxxKfVvoKNBpO9mA0mdbdqd9coMk5EBJhSifxGnnbY8aYwdOpP37Tt0bqz1juqmZuZqL9p2DWNOhcGaszULPxahYy+LYnHWDvskhDfqiQpJ8Wb35znvekkCNtk996Zug1Igpes= kali@kali
+
+
+manage_resolv_conf: false
+resolv_conf:
+  nameservers:
+    - 8.8.8.8
+
+hostname: storage-01
+fqdn: vm-01.homelab
+
+#na potrzeby debugowania sieci/problemow z kluczami mozna odkomentowac
+#ssh_pwauth: True
+#chpasswd:
+#  expire: True
