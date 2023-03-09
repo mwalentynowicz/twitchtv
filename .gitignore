@@ -33,3 +33,5 @@ override.tf.json
 
 # logi terraforma
 */terraform.log
+
+*/ssh_keys/

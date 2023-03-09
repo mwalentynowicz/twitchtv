@@ -6,6 +6,7 @@ ENV CONFIGURATION:
 - [ ] przygotowac scene do pracy w draw.io (przetestowac)
 - [ ] zrobic opis toolstacka and techstacka komendy twitcha
 - [ ] use one language... in doc
+- [ ] add list of used links on stream
 
 
 HOMELAB:
