@@ -1,2 +1,4 @@
 # twitchtv
-A repository documenting edu streams on twitch.tv
+A repository documenting educational streams on twitch.tv
+
+Link: www.twitch.tv/karuzelnw
