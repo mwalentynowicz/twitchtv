@@ -1,10 +1,6 @@
-# Orig source: https://yetiops.net/posts/proxmox-terraform-cloudinit-saltstack-prometheus/
-
 resource "proxmox_vm_qemu" "ansible_vms" {
   #todo:
-  # 5. Napisac dokumentacje dotyczaca jak stworzona zostala templatka po stronie proxmoxa, ktora klonujemy!!!
   # 6. Skrypt do parametryzacji kodu terraforma
-  # 7. wygenerowac lepszy obraz z agentem!
 
   count = "5"
 
@@ -14,8 +10,8 @@ resource "proxmox_vm_qemu" "ansible_vms" {
   target_node = "pve"
 
   #vm template
-  clone = "debian-cloudinit"
-  os_type = "cloud-init"
+  clone = "ubuntu-cloudinit-template"
+  os_type = "cloudinit"
 
   # Cloud init options
   ciuser = "ansible"
@@ -27,7 +23,7 @@ resource "proxmox_vm_qemu" "ansible_vms" {
   memory       = var.ansible_vm[count.index].ram
 
   #z powodu, ze obraz ktorego uzywam nie ma zainstalowanego qemu-guest-agenta domyslnie wylaczam poki co te opcje
-  agent        = 0
+  agent        = 1
   sockets       = 1
   cores         = 1
 
@@ -56,7 +52,7 @@ resource "proxmox_vm_qemu" "ansible_vms" {
     user        = "ansible"
     host        = var.ansible_vm[count.index].ip
     #password    = "ansible"
-    private_key = file("${path.module}/ssh_keys/klucz_priv")
+    private_key = file("${path.module}/ssh_keys/id_rsa")
     port        = "22"
   }
 
