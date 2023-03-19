@@ -4,6 +4,7 @@
   gather_facts: false
   become: yes
 
+
   tasks:
     - name: Install fail2ban
       ansible.builtin.apt:
@@ -14,7 +15,13 @@
       ansible.builtin.lineinfile:
          path: /etc/fail2ban/jail.conf
          regexp: '#ignoreip'
-         line: ignoreip = 127.0.0.1/8 ::1 192.168.1.101 192.168.1.102 192.168.1.103 192.168.1.104 192.168.1.105 #fix it :)
+         line: ignoreip = 127.0.0.1/8 ::1 {{ item | join("") }} #fix it :)
+      with_items:
+        - 192.168.1.101
+        - 192.168.1.102
+        - 192.168.1.103
+        - 192.168.1.104
+        - 192.168.1.105
 
     - name: Reload service
       ansible.builtin.service:
