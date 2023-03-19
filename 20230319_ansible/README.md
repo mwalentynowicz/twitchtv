@@ -1,0 +1,1 @@
+Practice ansible based on PDF from https://77.mrugalski.pl

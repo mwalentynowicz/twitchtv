@@ -1,0 +1,1 @@
+ansible -i inventory/inventory.ini --private-key /home/kali/twitchtv/20230309_proxmox_terraform/ssh_keys/id_rsa -a uptime all --limit '!web03.local'

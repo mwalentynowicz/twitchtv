@@ -1,0 +1,16 @@
+---
+- name: Task 3 - SSH Keys
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Set authorized key taken from file
+      ansible.posix.authorized_key:
+        user: ansible
+        state: present
+        key: "{{ lookup('file', '{{ item }}') }}"
+      loop:
+        - klucze/klucz1_rsa.pub
+        - klucze/klucz2_rsa.pub
+        - klucze/klucz3_rsa.pub
+

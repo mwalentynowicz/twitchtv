@@ -1,0 +1,29 @@
+---
+- name: Install fail2ban + ignoreip
+  hosts: web01.local
+  gather_facts: false
+  become: yes
+
+  tasks:
+    - name: Install fail2ban
+      ansible.builtin.apt:
+        state: present
+        name: fail2ban
+
+    - name: Reconfigure fail2ban
+      ansible.builtin.lineinfile:
+         path: /etc/fail2ban/jail.conf
+         regexp: '#ignoreip'
+         line: ignoreip = 127.0.0.1/8 ::1 192.168.1.101 192.168.1.102 192.168.1.103 192.168.1.104 192.168.1.105 #fix it :)
+
+    - name: Reload service
+      ansible.builtin.service:
+        name: fail2ban
+        state: reloaded
+      register: restartfail2banout
+      changed_when: "'started' not in restartfail2banout.state"
+
+    - debug:
+        msg: "{{ restartfail2banout.state }}"
+
+    #jail2.conf
